@@ -18,12 +18,12 @@ struct studentas {
 
 
 void spausdinimas(studentas stud) {
-	cout << "vardas         Pavarde         galutinis(vid)"<< "\n";
-	cout << "---------------------------------------------"<< "\n";
-	cout << stud.vardas << "      " << stud.pav << "      ";
+	
+	//cout << "---------------------------------------------"<< "\n";
+	cout << stud.vardas << "          " << stud.pav << "         ";
 	cout << std::fixed;
 	cout << std::setprecision(2);
-	cout << stud.med <<"\n";
+	cout << stud.gal <<"\n";
 
 }
 
@@ -32,7 +32,7 @@ int int_imimas() {
 	cin >> pazymys;
 
 	//Error check
-	while ((cin.good() == false) && (0 <= pazymys)) {
+	while ((cin.good() == false) or !(0 <= pazymys)) {
 		cout << "neteisinga ivestis." << '\n';
 
 		cin.clear();
@@ -49,7 +49,7 @@ int ndskaiciaus_imimas() {
 	cin >> nskaicius;
 
 	//Error check
-	while ((cin.good() == false) && (nskaicius <= 10 && 0 <= nskaicius)) {
+	while ((cin.good() == false) or !(nskaicius <= 10 && 0 <= nskaicius)) {
 		cout << "neteisinga ivestis." << '\n';
 
 		cin.clear();
@@ -61,12 +61,29 @@ int ndskaiciaus_imimas() {
 	return nskaicius;
 };
 
+int menu_pasirinkimas() {
+	int pasirink;
+	cin >> pasirink;
+
+	//Error check
+	while ((cin.good() == false) or !(pasirink <= 1 && 0 <= pasirink)) {
+		cout << "neteisinga ivestis." << '\n';
+
+		cin.clear();
+		cin.ignore(999, '\n');
+
+		//is naujo paparaso:
+		cout << "Bandykite dar karta: "; cin >> pasirink;
+	}
+	return pasirink;
+};
+
 float pazymiu_imimas() {
 	float pazymys;
 	cin >> pazymys;
 
 	//Error check
-	while ((cin.good() == false) && (pazymys<=10 && 0<=pazymys) ) {
+	while ((cin.good() == false) or !(pazymys<=10 && 1<=pazymys) ) {
 		cout << "neteisinga ivestis." << '\n';
 
 		cin.clear();
@@ -120,7 +137,7 @@ studentas sukurimas() {
 	cout << "Iveskite egzamino rezultata: "; zmogus.egz = pazymiu_imimas();
 	cout << endl;
 
-	zmogus.gal = 0.4 * zmogus.vid + 0.6 * zmogus.egz;
+	
 	return zmogus;
 };
 /*
@@ -161,6 +178,21 @@ int main() {
 	studentas* grupe = new studentas[n];
 	for (int i = 0; i < n; i++) { grupe[i] = sukurimas(); };
 	//spausdinimas
+	int pasirinkimas = 0;
+	cout << "Spausdinti galutini pagal vidurki(0) ar mediana(1)"; pasirinkimas = menu_pasirinkimas();
+	if (pasirinkimas = 0) {
+		for (int i = 0; i < n; i++){
+			grupe[i].gal = 0.4 * grupe[i].vid + 0.6 * grupe[i].egz;
+	}
+		cout << "vardas         Pavarde         galutinis(vid)" << "\n";
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			grupe[i].gal = 0.4 * grupe[i].med + 0.6 * grupe[i].egz;
+		}
+		cout << "vardas         Pavarde         galutinis(med)" << "\n";
+	}
+	cout << "---------------------------------------------" << "\n";
 	for (int i = 0; i < n; i++) { spausdinimas(grupe[i]); };
 	cout << endl;
 
