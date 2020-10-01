@@ -160,19 +160,7 @@ void spausdintiviska(studentas* grupe, int n)
     };
     cout << endl;
 }
-/*
-bool palyginimas(studentas st1, studentas st2)
-{
-    if(st1.vardas < st2.vardas) {return true;}
-    return false;
-}
 
-vector<studentas> rusiavimas(vector<studentas>  studentai)
-{
-     sort(studentai.begin(), studentai.end(), palyginimas);
-     return studentai;
-}
-*/
 bool palyginti_studentu_vardus(studentas stud1, studentas stud2)
 {
     return stud1.vardas < stud2.vardas;
