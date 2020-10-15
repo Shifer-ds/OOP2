@@ -3,6 +3,14 @@
 
 int main()
 {
+    int atlikti_testa = 0;
+
+    cout << "ar atlikti testa? (ne - 0, taip - 1)";
+    atlikti_testa = menu_pasirinkimas();
+    if(atlikti_testa = 1){
+            gentyrimas();
+    }
+    else{
     int arfailas = 0;
     cout << "imti duomenis is failo? (ne - 0, taip - 1)";
     arfailas = menu_pasirinkimas();
@@ -23,5 +31,6 @@ int main()
         //spausdinimas
         spausdintiviska(grupe, n);
         delete[] grupe;
+    }
     }
 };

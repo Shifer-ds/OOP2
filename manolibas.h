@@ -16,7 +16,7 @@ using std::endl;
 using std::vector;
 using std::ifstream;
 using std::setprecision;
-
+using namespace std;
 struct studentas
 {
     string vardas = "", pav = "";
