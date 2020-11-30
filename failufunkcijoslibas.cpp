@@ -158,20 +158,24 @@ vector<studentas> nuskaitymasVECTOR(int kiekis){
 };
 
 list<studentas> surusiavimasLIST(list<studentas> studentai){
-    list<studentas> kietekai;
+    int dydis = studentai.size();
     list<studentas> nelaimeliai;
-    float penki = 5;
-    for(studentas i : studentai){
-        if((i.gal) >= penki){
-            kietekai.push_back(i);
+    list<studentas> kietekai;
+    for(int i = 0 ; i < dydis; i++)
+    {
+        studentas stud = studentai.back();
+        studentai.pop_back();
+        if(stud.egz < 5)
+        {
+            nelaimeliai.push_back(stud);
         }
-        else{
-            nelaimeliai.push_back(i);
+        else
+        {
+            kietekai.push_back(stud);
         }
-        }
+    }
     return kietekai;
 };
-
 vector<studentas> surusiavimasVECTOR(vector<studentas> studentai){
     vector<studentas> kietekai;
     vector<studentas> nelaimeliai;
@@ -292,7 +296,7 @@ void generavimas(int kiekis){
 }
 
 void gentyrimas(){
-    vector<int> tyrimumatmenys = {1000, 10000, 100000, 1000000, 10000000};
+    vector<int> tyrimumatmenys = {1000,/* 10000, 100000, 1000000,*/ 10000000};
     for (int i : tyrimumatmenys){
 
     generavimas(i);
@@ -300,5 +304,127 @@ void gentyrimas(){
 
 };
 }
+
+void optimizavimoTyrimas(){
+    vector<int> tyrimumatmenys = {1000, 10000, 100000, 1000000, 10000000};
+    for (int kiekis : tyrimumatmenys){
+
+        //duomenu sugeneravims
+        vector<studentas> studentaiV;
+        list<studentas> studentaiL;
+        vector<studentas> studentaiV2;
+        list<studentas> studentaiL2;
+        int nd = 10;
+        for (int k = 0; k < kiekis; k++ ){
+            studentas zmogus;
+            for (int i = 0; i < nd; i++){
+                zmogus.paz[i] = rand() % 10 + 1;
+                zmogus.vid += zmogus.paz[i];
+            }
+            zmogus.vid = zmogus.vid / nd;
+            zmogus.egz = rand() % 10 + 1;
+            zmogus.gal = 0.4 * zmogus.vid + 0.6 * zmogus.egz;
+            studentaiV.push_back(zmogus);
+            studentaiL.push_back(zmogus);
+            studentaiV2.push_back(zmogus);
+            studentaiL2.push_back(zmogus);
+        }
+
+
+
+        cout << "Duomenys sugeneruoti. Atliekama 1 strategijos analize su "+std::to_string(kiekis)+" vnt.: \n \n";
+
+        auto t13List = std::chrono::high_resolution_clock::now();//nuo cia
+        list<studentas> nelaimeliaiL;
+        list<studentas> kietekaiL;
+        for(int i = 0 ; i < kiekis; i++)
+        {
+            studentas stud = studentaiL.back();
+            studentaiL.pop_back();
+            if(stud.egz < 5)
+            {
+                nelaimeliaiL.push_back(stud);
+            }
+            else
+            {
+                kietekaiL.push_back(stud);
+            }
+        }
+        auto t23List = std::chrono::high_resolution_clock::now();
+
+        auto t13Vector = std::chrono::high_resolution_clock::now();
+
+        vector<studentas> kietekaiV;
+        vector<studentas> nelaimeliaiV;
+
+        for(studentas i : studentaiV){
+            if((i.gal) >= 5){
+                kietekaiV.push_back(i);
+            }
+            else{
+                nelaimeliaiV.push_back(i);
+            }
+        }
+
+        auto t23Vector = std::chrono::high_resolution_clock::now();
+
+
+        std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i VECTOR grupes truko: "
+                    << std::chrono::duration_cast<std::chrono::milliseconds>(t23Vector-t13Vector).count()
+                    << " Milisekundes\n";
+        std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i LIST   grupes truko: "
+                        << std::chrono::duration_cast<std::chrono::milliseconds>(t23List-t13List).count()
+                        << " Milisekundes\n \n";//iki cia
+
+        cout << "                      Atliekama 2 strategijos analize su "+std::to_string(kiekis)+" vnt.: \n \n";
+
+        auto t14List = std::chrono::high_resolution_clock::now();
+
+        list<studentas> nelaimeliaiL2;
+
+        for(studentas studentas: studentaiL2)
+        {
+            if(studentas.egz < 5)
+            {
+                nelaimeliaiL2.push_back(studentas);
+            }
+        }
+        studentaiL2.erase(remove_if(studentaiL2.begin(), studentaiL2.end(), [](studentas stud)
+        {
+            return stud.egz < 5;
+        }), studentaiL2.end());
+
+
+        auto t24List = std::chrono::high_resolution_clock::now();
+
+        auto t14Vector = std::chrono::high_resolution_clock::now();
+
+        vector<studentas> nelaimeliaiV2;
+        for(studentas stud: studentaiV2)
+        {
+            if(stud.egz < 5)
+            {
+                nelaimeliaiV2.push_back(stud);
+            }
+
+        }
+        studentaiV2.erase(std::remove_if(studentaiV2.begin(), studentaiV2.end(), [](studentas stud)
+        {
+            return stud.egz < 5;
+        }), studentaiV2.end());
+
+        auto t24Vector = std::chrono::high_resolution_clock::now();
+
+
+        std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i VECTOR grupes truko: "
+                    << std::chrono::duration_cast<std::chrono::milliseconds>(t24Vector-t14Vector).count()
+                    << " Milisekundes\n";
+        std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i LIST   grupes truko: "
+                        << std::chrono::duration_cast<std::chrono::milliseconds>(t24List-t14List).count()
+                        << " Milisekundes\n \n";//iki cia
+
+    }
+};
+
 
 

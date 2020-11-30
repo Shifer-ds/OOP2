@@ -7,4 +7,5 @@ bool palyginti_studentu_vardus(studentas stud1, studentas stud2);
 vector<studentas> isrikiuoti_vektoriu_pagal_vardus(vector<studentas>  studentai);
 void isfailo();
 void gentyrimas();
+void optimizavimoTyrimas();
 #endif // FAILUFUNKCIJOSLIBAS_H_INCLUDED

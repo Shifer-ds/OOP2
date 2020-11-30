@@ -20,7 +20,7 @@ using namespace std;
 struct studentas
 {
     string vardas = "", pav = "";
-    float paz[100], vid, med, egz, gal;
+    float paz[11], vid, med, egz, gal;
 };
 
 void spausdinimas(studentas stud);
