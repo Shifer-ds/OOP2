@@ -5,20 +5,28 @@ Paskutinės versijos paleidimas:
 3. Paleisti programą
 ## Instrukcijos
 - Paleidžiama programa
-- Norint paleisti vector ir list testavimą (v0.5) "1".
-- Norint paleisti strategijų analizę (v1.0) "0" tada "1".
-- Norint paleisti ankstesnių versijų operacijas "0" tada "0".
+- Norint paleisti vector ir list testavimą "1" enter. [v0.5]
+- Norint paleisti strategijų analizę "0" enter tada "1" enter. [v1.0]
+- Norint paleisti ankstesnių versijų operacijas "0" enter tada "0" enter: 
+- - Norint paleisti duomenų nuskaitymą iš failų reikia "studentai10000.txt", kuriame turi būti studentų duomenys(vardas, pavarde, pažymiai(5), egz. pažymys). [v0.2]
+- - Norint suvesti duomenis ranka (taip pat išnaudoti atsitiktinių pažymių generavimą) "0" enter "0" enter "0" enter. Tada parašyti studentų skaičių ir kiekvienam sutekti vardą, pavardę ir pažymius. [v0.1]
 ## Versijų istorija
 
-[v0.1](https://github.com/Shifer-ds/University-work/releases/tag/0.1v) - išpildyti visi 1 užduoties reikalavimai. vektoriai - sprendimas su vektoriais sukeltas į mainVektor.cpp(nuo vector), o su C masyvu į mainArray.cpp(). <br />
+### [v0.1](https://github.com/Shifer-ds/University-work/releases/tag/0.1v) 
+Užduotis sukurti programą, kuria galima suvesti studentų duomenis (vardas, pavarde, pažymiai, egz. pažymys) ir ji gražina galutinį įvertinimą kiekvienam studentui.
 <br />
-[v0.2](https://github.com/Shifer-ds/University-work/releases/tag/v0.2)<br />
+### [v0.2](https://github.com/Shifer-ds/University-work/releases/tag/v0.2)
+Pridėta funkcija duomenų nuskaitymui.
 <br />
-[v0.3](https://github.com/Shifer-ds/University-work/releases/tag/v0.3) - išpildyti visi 3 užduoties reikalavimai. sukurti du header failai ir papildomi du .cpp failai kuriuose yra: failufunkcijoslibas.cpp - funkcijos skirtos dirbti su failais(ir susijusios funkcijos), manolibas.cpp - visos kitos funkcijos. Išimčių valdymas panaudotas faile "failufunkcijoslibas.cpp" funkcijoje "isfailo()" patikrinti ar tinkamas failas<br />
+### [v0.3](https://github.com/Shifer-ds/University-work/releases/tag/v0.3)
+Užduotis patobulinti programą ją išskaidant į .cpp ir .h failus. Yra sukurti du header failai ir papildomi du .cpp failai kuriuose yra: failufunkcijoslibas.cpp - funkcijos skirtos dirbti su failais(ir susijusios funkcijos), manolibas.cpp - visos kitos funkcijos. Išimčių valdymas panaudotas faile "failufunkcijoslibas.cpp" funkcijoje "isfailo()" patikrinti ar tinkamas failas<br />
 <br />
-[v0.4](https://github.com/Shifer-ds/University-work/releases/tag/v0.4) <br />
+### [v0.4](https://github.com/Shifer-ds/University-work/releases/tag/v0.4) 
+Užduotis sugeneruoti skirtingų duomenų dydžio failus. Juos nuskaityti. Išrušiuoti į du skirtingus failus (pagal galutinį pažymį <5 ir 5<). Be to išmatuoti šių veiksmų spartą.<br />
 <br />
-[v0.5](https://github.com/Shifer-ds/University-work/releases/tag/v0.5) - Intel Core i5-8250U CPU @ 1.60GHz, 8GB RAM, SSD <br />
+### [v0.5](https://github.com/Shifer-ds/University-work/releases/tag/v0.5)
+Testas atliekamas su: Intel Core i5-8250U CPU @ 1.60GHz, 8GB RAM, SSD. <br />
+Užduotis palyginti duomenų apdorojimo spartą, kai duomenys yra LIST ir VECTOR struktūrose:<br />
 <br />
 Failo su 1000 duomenimis sukurimas truko: 15 Milisekundes<br />
 Failo su 1000 duomenimis nuskaitymas i VECTOR truko: 15 Milisekundes<br />
@@ -71,7 +79,7 @@ Failo su 10000000 pilnas apdorojimas su VECTOR truko: 196966 Milisekundes<br />
 Failo su 10000000 pilnas apdorojimas su LIST   truko: 162174 Milisekundes<br />
 <br />
 <br />
-[v1.0](https://github.com/Shifer-ds/University-work/releases/tag/v1.0) - 2 strategijų analizė. <br />
+### [v1.0](https://github.com/Shifer-ds/University-work/releases/tag/v1.0) - 2 strategijų analizė.
 1 strategija: sukuriami 2 masyvai(list arba vector tipo) ir į juos išskaidomi duomenys. <br />
 2 strategija: sukuriamas 1 masyvas(list arba vector tipo) į kurį sudedama dalis duomenų, o pasikartojantys duomenys iš orginalaus duomenų masyvo ištrinami. <br />
 Abiejų strategijų rezultas yra du masyvai su atitinkamais duomenimis.<br />
