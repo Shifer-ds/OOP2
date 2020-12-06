@@ -1,4 +1,4 @@
-#ifndef FAILUFUNKCIJOSLIBAS_H_INCLUDED
+ #ifndef FAILUFUNKCIJOSLIBAS_H_INCLUDED
 #define FAILUFUNKCIJOSLIBAS_H_INCLUDED
 #include <chrono>
 #include "manolibas.h"

@@ -11,13 +11,6 @@ int main()
         gentyrimas();
     }
     else{
-    int optimizacijos = 0;
-    cout << "atlikti optimizavimo strategiju tyrima? (ne - 0, taip - 1)";
-    optimizacijos = menu_pasirinkimas();
-    if(optimizacijos == 1){
-        optimizavimoTyrimas();
-    }
-    else{
     int arfailas = 0;
     cout << "imti duomenis is failo? (ne - 0, taip - 1)";
     arfailas = menu_pasirinkimas();
@@ -40,5 +33,5 @@ int main()
         delete[] grupe;
         }
     }
-    }
+
 };

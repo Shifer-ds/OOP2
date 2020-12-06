@@ -1,5 +1,31 @@
 #include "manolibas.h"
 
+float vidurkis(vector<float> paz)
+{
+    float vid = 0;
+    float suma = 0;
+    for(float i: paz){
+        suma = suma + i;
+    }
+    vid = suma/paz.size();
+    return vid;
+}
+float median(vector<float> paz)
+{
+    float mediana = 0;
+    int nd = paz.size();
+    sort(paz.begin(), paz.end());
+    if (nd % 2 != 0)
+    {
+        mediana = (float)paz[nd / 2];
+    }
+    else
+    {
+        mediana = (float)((paz[(nd - 1) / 2] + paz[nd / 2])) / 2.0;
+    };
+    return mediana;
+}
+
 void spausdinimas(studentas stud)
 {
     cout << stud.vardas

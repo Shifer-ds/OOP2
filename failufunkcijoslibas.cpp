@@ -61,11 +61,11 @@ void isfailo()
     spausdintiviska(grupe, kiek);
 };
 
-list<studentas> nuskaitymasLIST(int kiekis){
+vector<Studentoclase> nuskaitymasClase(int kiekis){
 
     ifstream duomenys;
 
-    list<studentas> studentai;
+    vector<Studentoclase> studentai;
 
     try
     {
@@ -76,9 +76,11 @@ list<studentas> nuskaitymasLIST(int kiekis){
         while (!duomenys.eof())
         {
             getline(duomenys, dummyLine);
-            studentas st;
-            duomenys >> st.vardas >> st.pav;
-            st.vid = 0;
+            string vardas;
+            string pavarde;
+            float egz;
+            vector<float> pazymiai;
+            duomenys >> vardas >> pavarde;
             for (int i = 0; i < 5; i++)
             {
                 duomenys >> temp;
@@ -86,17 +88,15 @@ list<studentas> nuskaitymasLIST(int kiekis){
                 {
                     throw 1;
                 }
-                st.paz[i]=stoi(temp);
-                st.vid += st.paz[i];
+                pazymiai.push_back(stoi(temp));
             }
-            st.vid = st.vid/5;
             duomenys >> temp;
             if ((cin.good() == false) or !(stoi(temp) <= 10 && 1 <= stoi(temp)))
             {
                 throw 1;
             }
-            st.egz = stoi(temp);
-            st.gal = 0.4 * st.vid + 0.6 * st.egz;
+            egz = stoi(temp);
+            Studentoclase st (vardas, pavarde, pazymiai, egz);
             studentai.push_back(st);
         }
         duomenys.close();
@@ -109,7 +109,7 @@ list<studentas> nuskaitymasLIST(int kiekis){
     return studentai;
 };
 
-vector<studentas> nuskaitymasVECTOR(int kiekis){
+vector<studentas> nuskaitymasStrukt(int kiekis){
 
     ifstream duomenys;
 
@@ -157,38 +157,37 @@ vector<studentas> nuskaitymasVECTOR(int kiekis){
     return studentai;
 };
 
-list<studentas> surusiavimasLIST(list<studentas> studentai){
-    int dydis = studentai.size();
-    list<studentas> nelaimeliai;
-    list<studentas> kietekai;
-    for(int i = 0 ; i < dydis; i++)
-    {
-        studentas stud = studentai.back();
-        studentai.pop_back();
-        if(stud.egz < 5)
+vector<Studentoclase> surusiavimasClase(vector<Studentoclase> studentaiC){
+    vector<Studentoclase> nelaimeliaiC2;
+        for(Studentoclase stud: studentaiC)
         {
-            nelaimeliai.push_back(stud);
+            if(stud.getGal() < 5)
+            {
+                nelaimeliaiC2.push_back(stud);
+            }
+
         }
-        else
+        studentaiC.erase(std::remove_if(studentaiC.begin(), studentaiC.end(), [](Studentoclase stud)
         {
-            kietekai.push_back(stud);
-        }
-    }
-    return kietekai;
+            return stud.getGal() < 5;
+        }), studentaiC.end());
+        return studentaiC;
 };
-vector<studentas> surusiavimasVECTOR(vector<studentas> studentai){
-    vector<studentas> kietekai;
-    vector<studentas> nelaimeliai;
-    float penki = 5;
-    for(studentas i : studentai){
-        if((i.gal) >= penki){
-            kietekai.push_back(i);
+vector<studentas> surusiavimasStruk(vector<studentas> studentai){
+    vector<studentas> nelaimeliaiV2;
+        for(studentas stud: studentai)
+        {
+            if(stud.gal < 5)
+            {
+                nelaimeliaiV2.push_back(stud);
+            }
+
         }
-        else{
-            nelaimeliai.push_back(i);
-        }
-        }
-    return nelaimeliai;
+        studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](studentas stud)
+        {
+            return stud.gal < 5;
+        }), studentai.end());
+    return nelaimeliaiV2;
 };
 
 void generavimas(int kiekis){
@@ -212,42 +211,42 @@ void generavimas(int kiekis){
                 << " Milisekundes\n";
 
     auto t12vector = std::chrono::high_resolution_clock::now();
-    vector<studentas> studentaiV;
-    studentaiV = nuskaitymasVECTOR(kiekis);
+    vector<studentas> studentaiS;
+    studentaiS = nuskaitymasStrukt(kiekis);
     auto t22vector = std::chrono::high_resolution_clock::now();
 
     auto t12list = std::chrono::high_resolution_clock::now();
-    list<studentas> studentaiL;
-    studentaiL = nuskaitymasLIST(kiekis);
+    vector<Studentoclase> studentaiC;
+    studentaiC = nuskaitymasClase(kiekis);
     auto t22list = std::chrono::high_resolution_clock::now();
 
 
-    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis nuskaitymas i VECTOR truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis nuskaitymas su STRUCT  truko: "
                 << std::chrono::duration_cast<std::chrono::milliseconds>(t22vector-t12vector).count()
                 << " Milisekundes\n";
-    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis nuskaitymas i LIST   truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis nuskaitymas su CLASS   truko: "
                 << std::chrono::duration_cast<std::chrono::milliseconds>(t22list-t12list).count()
                 << " Milisekundes\n";
 
     auto t13List = std::chrono::high_resolution_clock::now();//nuo cia
 
-    list<studentas> kietekai;
-    kietekai = surusiavimasLIST(studentaiL);
+    vector<Studentoclase> kietekai;
+    kietekai = surusiavimasClase(studentaiC);
 
     auto t23List = std::chrono::high_resolution_clock::now();
 
     auto t13Vector = std::chrono::high_resolution_clock::now();
 
     vector<studentas> nelaimeliai;
-    nelaimeliai = surusiavimasVECTOR(studentaiV);
+    nelaimeliai = surusiavimasStruk(studentaiS);
 
     auto t23Vector = std::chrono::high_resolution_clock::now();
 
 
-    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i VECTOR grupes truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas su STRUCT grupes truko: "
                 << std::chrono::duration_cast<std::chrono::milliseconds>(t23Vector-t13Vector).count()
                 << " Milisekundes\n";//iki cia
-    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas i LIST   grupes truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis) +" duomenimis isskaidymas su Class  grupes truko: "
                     << std::chrono::duration_cast<std::chrono::milliseconds>(t23List-t13List).count()
                     << " Milisekundes\n";//iki cia
 
@@ -256,12 +255,12 @@ void generavimas(int kiekis){
     ofstream myfile1;
     myfile1.open ("kietekai" + std::to_string(kiekis) + ".txt");
     myfile1 << "kietiVardas       Pavarde        ND1      ND2      ND3      ND4      ND5      EGZ      GAL \n";
-    for (studentas i : kietekai){
-        myfile1 << std::setw(12) << i.vardas;
-        myfile1 << std::setw(16) << i.pav;
-        for (int ia=0; ia<5; ia++){ myfile1<< std::setw(9) << std::fixed << setprecision(2) <<  i.paz[ia];};
-         myfile1<< std::setw(9) << std::fixed << setprecision(2) << i.egz;
-        myfile1<< std::setw(9) << std::fixed << setprecision(2) << i.gal;
+    for (Studentoclase i : kietekai){
+        myfile1 << std::setw(12) << i.getVardas();
+        myfile1 << std::setw(16) << i.getPavarde();
+        for (int ia=0; ia<5; ia++){ myfile1<< std::setw(9) << std::fixed << setprecision(2) <<  i.getPaz(ia);};
+         myfile1<< std::setw(9) << std::fixed << setprecision(2) << i.getGal();
+        myfile1<< std::setw(9) << std::fixed << setprecision(2) << i.getGal();
         myfile1 << "\n";
     }
     myfile1.close();
@@ -285,18 +284,18 @@ void generavimas(int kiekis){
 
     auto visas2 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Failo su "+ std::to_string(kiekis)+ " pilnas apdorojimas su VECTOR truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis)+ " pilnas apdorojimas su STRUCT truko: "
             << std::chrono::duration_cast<std::chrono::milliseconds>(visas2-visas-(t23List-t13List)-(t22list-t12list)).count()
             << " Milisekundes\n";
 
-    std::cout << "Failo su "+ std::to_string(kiekis)+ " pilnas apdorojimas su LIST   truko: "
+    std::cout << "Failo su "+ std::to_string(kiekis)+ " pilnas apdorojimas su CLASS  truko: "
               << std::chrono::duration_cast<std::chrono::milliseconds>(visas2-visas-(t23Vector-t13Vector)-(t22vector-t12vector)).count()
               << " Milisekundes\n"<<"\n";
 
 }
 
 void gentyrimas(){
-    vector<int> tyrimumatmenys = {1000,/* 10000, 100000, 1000000,*/ 10000000};
+    vector<int> tyrimumatmenys = {100000, 1000000};
     for (int i : tyrimumatmenys){
 
     generavimas(i);
@@ -305,6 +304,7 @@ void gentyrimas(){
 };
 }
 
+/*
 void optimizavimoTyrimas(){
     vector<int> tyrimumatmenys = {1000, 10000, 100000, 1000000, 10000000};
     for (int kiekis : tyrimumatmenys){
@@ -378,24 +378,6 @@ void optimizavimoTyrimas(){
 
         cout << "                      Atliekama 2 strategijos analize su "+std::to_string(kiekis)+" vnt.: \n \n";
 
-        auto t14List = std::chrono::high_resolution_clock::now();
-
-        list<studentas> nelaimeliaiL2;
-
-        for(studentas studentas: studentaiL2)
-        {
-            if(studentas.egz < 5)
-            {
-                nelaimeliaiL2.push_back(studentas);
-            }
-        }
-        studentaiL2.erase(remove_if(studentaiL2.begin(), studentaiL2.end(), [](studentas stud)
-        {
-            return stud.egz < 5;
-        }), studentaiL2.end());
-
-
-        auto t24List = std::chrono::high_resolution_clock::now();
 
         auto t14Vector = std::chrono::high_resolution_clock::now();
 
@@ -424,7 +406,7 @@ void optimizavimoTyrimas(){
                         << " Milisekundes\n \n";//iki cia
 
     }
-};
+*/
 
 
 
