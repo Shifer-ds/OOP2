@@ -48,6 +48,32 @@ class Studentoclase
             this->med = median(paz);
             this->gal = vid*0.4 + 0.6*egz;
         }
+
+        Studentoclase(const Studentoclase &copi)
+        {
+            this->vardas = copi.vardas;
+            this->pav = copi.pav;
+            this->paz = copi.paz;
+            this->egz = copi.egz;
+            this->vid = copi.vid;
+            this->med = copi.med;
+            this->gal = copi.gal;
+        }
+        Studentoclase &operator =(const Studentoclase &coopi)
+        {
+            this->vardas = coopi.vardas;
+            this->pav = coopi.pav;
+            this->paz = coopi.paz;
+            this->egz = coopi.egz;
+            this->vid = coopi.vid;
+            this->med = coopi.med;
+            this->gal = coopi.gal;
+            return *this;
+        }
+        ~Studentoclase()
+        {
+
+        }
         string getVardas()
         {
             return vardas;
