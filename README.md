@@ -98,3 +98,5 @@ Failo su 1000000 pilnas apdorojimas su CLASS  truko: 15917 Milisekundes<br />
 <br />
 Rezultate: F3 apdoroja greičiausiai. Struct struktūra greitesnė.
 
+### [v1.2](https://github.com/Shifer-ds/OOP2/releases/tag/v1.2)
+Studento klasė papildyta pagal rule of three reikalavimus.<br />
