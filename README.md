@@ -104,3 +104,5 @@ Studento klasė papildyta pagal rule of three reikalavimus.<br />
 ### [v1.5](https://github.com/Shifer-ds/OOP2/releases/tag/v1.5)
 Sukurta zmogaus klasė, su kintamaisiai string vardas ir pavarde.<br />
 Studento klasė paveldi žmogaus klasę. Žmogaus klasė yra abstrakčioji.<br />
+### [v2.0](https://github.com/Shifer-ds/OOP2/releases/tag/v2.0)
+Prideta doxygen dokumentacija ir programos kodas papildytas funkciju komentarais.<br />
