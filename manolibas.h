@@ -25,13 +25,18 @@ struct studentas
 
 float vidurkis(vector<float> paz);
 float median(vector<float> paz);
+class ZmogusClase
+{
+protected:
+    ZmogusClase(){}
+    string vardas;
+    string pav;
 
-class Studentoclase
+};
+class Studentoclase : public ZmogusClase
         {
             //Galutinis pagal vidurki
             private:
-            string vardas;
-            string pav;
             vector<float> paz;
             float egz;
             float vid;
