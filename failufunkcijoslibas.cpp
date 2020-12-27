@@ -2,17 +2,23 @@
 
 bool palyginti_studentu_vardus(studentas stud1, studentas stud2)
 {
+    /** studentu rusiavimui skirta palyginimo funkcija
+     */
     return stud1.vardas < stud2.vardas;
 }
 
 vector<studentas> isrikiuoti_vektoriu_pagal_vardus(vector<studentas>  studentai)
 {
+     /** studentu vektoriaus rusiavimo funkcija
+     */
     sort(studentai.begin(), studentai.end(), palyginti_studentu_vardus);
     return studentai;
 }
 
 void isfailo()
 {
+    /** duomenu is failo nuskaitymo funkcija, kuri ir atspausdina studentus su failo patikrinimu
+     */
     std::ifstream duomenys;
     vector<studentas> studentai;
     int kiek = 0;
@@ -62,7 +68,8 @@ void isfailo()
 };
 
 vector<Studentoclase> nuskaitymasClase(int kiekis){
-
+     /** duomenu is failo nuskaitymo funkcija, su patikrinimu
+     */
     ifstream duomenys;
 
     vector<Studentoclase> studentai;
@@ -191,6 +198,8 @@ vector<studentas> surusiavimasStruk(vector<studentas> studentai){
 };
 
 void generavimas(int kiekis){
+     /** spartos analizes funkcija
+     */
     auto visas = std::chrono::high_resolution_clock::now();
 
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -295,6 +304,8 @@ void generavimas(int kiekis){
 }
 
 void gentyrimas(){
+     /** funkcija skirta spartos testavimo matams
+     */
     vector<int> tyrimumatmenys = {100000, 1000000};
     for (int i : tyrimumatmenys){
 

@@ -2,6 +2,11 @@
 
 float vidurkis(vector<float> paz)
 {
+    /** Apskaiciuoja pazymiu vidurki
+     *
+     *
+     */
+
     float vid = 0;
     float suma = 0;
     for(float i: paz){
@@ -12,6 +17,9 @@ float vidurkis(vector<float> paz)
 }
 float median(vector<float> paz)
 {
+    /** Apskaiciuoja pavymiu mediana
+     */
+
     float mediana = 0;
     int nd = paz.size();
     sort(paz.begin(), paz.end());
@@ -28,6 +36,8 @@ float median(vector<float> paz)
 
 void spausdinimas(studentas stud)
 {
+    /** Studento duomenu spausdinimo funkcija
+     */
     cout << stud.vardas
          << std::setw(20) << stud.pav;
     cout << std::setw(20) << std::fixed <<
@@ -38,6 +48,8 @@ void spausdinimas(studentas stud)
 
 int int_imimas()
 {
+     /** int imimo funkcija, su patikrinimu
+     */
     int pazymys;
     cin >> pazymys;
 
@@ -58,6 +70,8 @@ int int_imimas()
 
 int ndskaiciaus_imimas()
 {
+    /** pazymiu skaiciaus imimo funkcija, su patikrinimu
+     */
     int nskaicius;
     cin >> nskaicius;
 
@@ -78,6 +92,8 @@ int ndskaiciaus_imimas()
 
 int menu_pasirinkimas()
 {
+     /** int reiksmes 0 arba 1 imimo funkcija skirta meniu pasirinkimui, su patikrinimu
+     */
     int pasirink;
     cin >> pasirink;
 
@@ -98,6 +114,8 @@ int menu_pasirinkimas()
 
 float pazymiu_imimas()
 {
+    /** pazymiu imimo funkcija, su patikrinimu
+     */
     float pazymys;
     cin >> pazymys;
 
@@ -118,6 +136,8 @@ float pazymiu_imimas()
 
 string vardo_imimas()
 {
+     /** string (vardo ir pavardes) imimo funkcija, su patikrinimu
+     */
     string vard;
     cin >> vard;
 
@@ -138,6 +158,8 @@ string vardo_imimas()
 
 void spausdintiviska(studentas* grupe, int n)
 {
+     /** visos grupes spausdinimo funkcija
+     */
     int pasirinkimas = 0;
     //sort(grupe, grupe + n);
     cout << "Spausdinti galutini pagal vidurki(0) ar mediana(1)";
@@ -169,6 +191,8 @@ void spausdintiviska(studentas* grupe, int n)
 
 studentas sukurimas()
 {
+     /** studento sukurimo su vartotojo ivestimis funkcija
+     */
     studentas zmogus;
     cout << "iveskite varda:   ";
     zmogus.vardas = vardo_imimas();

@@ -28,6 +28,8 @@ float median(vector<float> paz);
 class ZmogusClase
 {
 protected:
+
+
     ZmogusClase(){}
     string vardas;
     string pav;
